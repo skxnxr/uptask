@@ -11,7 +11,8 @@ function validarRegistro(e){
 
     //Para validar que los campos tengan algo escrito
     var usuario = document.querySelector('#usuario').value,
-        password = document.querySelector('#password').value;
+        password = document.querySelector('#password').value,
+        tipo = document.querySelector('#tipo').value;
         //console.log(usuario + "" + password);
     if (usuario === '' || password === '') {
         Swal.fire({
@@ -20,6 +21,30 @@ function validarRegistro(e){
             text: '¡Ambos campos son obligatorios!'
           })
     }else{
-        
+        //Capos correctos, mandar ejecutar AJAX
+
+        //Datos que se envian al servidor
+        var datos = new FormData();
+        datos.append('usuario', usuario);
+        datos.append('password', password);
+        datos.append('accion', tipo);
+            //console.log(datos.get('usuario'));
+
+        //Crear el llamado a AJAX
+        var xhr = new XMLHttpRequest;
+
+        //Crear el llamado a AJAX
+        xhr.open('POST', 'inc/modelos/modelos-admin.php', true);
+
+        //Retorno de datos
+        xhr.onload = function(){
+            if (this.status === 200) {
+                console.log(JSON.parse(xhr.responseText));
+            }
+        }
+
+        //Enviar la petición
+        xhr.send(datos);
+
     }
 }
