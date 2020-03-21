@@ -1,5 +1,6 @@
 <?php 
     include 'inc/funciones/funciones.php';
+    include 'inc/funciones/conexion.php';
     include 'inc/templates/header.php';
 ?>
 
