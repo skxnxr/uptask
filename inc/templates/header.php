@@ -11,4 +11,4 @@
     <link rel="stylesheet" href="css/sweetalert2.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="login">
+<body class="<?php echo obtenerPaginaActual(); ?>">
