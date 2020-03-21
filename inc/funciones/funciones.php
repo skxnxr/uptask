@@ -2,6 +2,7 @@
 
 function obtenerPaginaActual(){
     $archivo = basename($_SERVER['PHP_SELF']);
-    echo $archivo;
+    $pagina = str_replace(".php", "", $archivo);
+    echo $pagina;
 }
 obtenerPaginaActual();
