@@ -52,26 +52,13 @@ function validarRegistro(e){
                             title: 'Usuario Creado',
                             text: 'El usuario se creo correctamente'
                           })
-                     } // else if(respuesta.tipo === 'login'){
-                    //     Swal.fire({
-                    //         icon: 'success',
-                    //         title: 'Login correcto',
-                    //         text: 'Presiona ok'
-                    //       })
-                    //       .then(resultado =>{
-                    //           if (resultado.value) {
-                    //               window.location.href = 'index.php';
-                    //           }
-                    //       })
-                    // }
-                    
-                    //Nueva ventana para el tipo login     
+                     } 
                     else if(respuesta.tipo === 'login'){
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'center',
                             showConfirmButton: false,
-                            timer: 2000,
+                            timer: 1400,
                             timerProgressBar: true,
                             onOpen: (toast) => {
                               toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -85,14 +72,23 @@ function validarRegistro(e){
                             icon: 'success',
                             title: 'Logueado correctamente'
                           })       
-                    }         
+                    }
+                            
                     
-                }else{
+                }
+                else if(respuesta.tipo === 'passincorrect'){
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Contraseña incorrecta',
+                        text: 'Por favor corrigela'
+                      })
+                } 
+                else{
                     //Hubo un error
                     Swal.fire({
                         icon: 'error',
                         title: 'Error  :(',
-                        text: 'Hubo un error'
+                        text: 'Revisa nuevamente tus datos'
                       })
                 }
             }

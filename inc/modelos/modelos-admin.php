@@ -73,7 +73,8 @@ if($accion === 'login'){
             }else{
                 //Login incorrecto, enviar error
                 $respuesta = array(
-                    'resultado' => 'Password Incorrecto'
+                    'resultado' => 'Password Incorrecto',
+                    'tipo' => 'passincorrect'
                 );
             }
 
