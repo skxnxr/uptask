@@ -11,7 +11,7 @@ function eventListeners() {
 
 function nuevoProyecto(e) {
     e.preventDefault(); 
-    console.log('Presionaste en nuevo proyecto');
+    //console.log('Presionaste en nuevo proyecto');
 
     //Crea un input para el nombre del nuevo proyecto
     var nuevoProyecto = document.createElement('li');
@@ -35,14 +35,36 @@ function nuevoProyecto(e) {
 }
 
 function guadarProyectoDB(nombreProyecto) {
-     console.log(nombreProyecto);
+    // console.log(nombreProyecto);
+
+    // Crear llamado ajax
+    var xhr = new XMLHttpRequest();
+    
+    // enviar datos por formdata
+    var datos = new FormData();
+    datos.append('proyecto', nombreProyecto);
+    datos.append('accion', 'crear');
+    
+    // Abrir la conexion
+    xhr.open('POST', 'inc/modelos/modelo-proyecto.php', true);
+    
+    // En la carga
+    xhr.onload = function() {
+        if(this.status === 200) {
+            console.log(JSON.parse(xhr.responseText));
+        }
+    }
+    
+    //Enviar el Request
+    xhr.send(datos);
+
 
     //Inyectar el HTML
-    var nuevoProyecto = document.createElement('li');
-    nuevoProyecto.innerHTML = `
-        <a href="#">
-            ${nombreProyecto}
-        </a>
-    `;
-    listaProyectos.appendChild(nuevoProyecto);
-}
+    // var nuevoProyecto = document.createElement('li');
+    // nuevoProyecto.innerHTML = `
+    //     <a href="#">
+    //         ${nombreProyecto}
+    //     </a>
+    // `;
+    // listaProyectos.appendChild(nuevoProyecto);
+} 
