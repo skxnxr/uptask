@@ -65,7 +65,8 @@ if($accion === 'login'){
                 //Login correcto
                 $respuesta = array(
                     'respuesta' => 'correcto',
-                    'nombre' => $nombre_usuario
+                    'nombre' => $nombre_usuario,
+                    'tipo' => $accion
                     // 'id' => $id_usuario,
                     // 'pass' => $pass_usuario
                 );

@@ -52,7 +52,18 @@ function validarRegistro(e){
                             title: 'Usuario Creado',
                             text: 'El usuario se creo correctamente'
                           })
-                    } //else if(respuesta.tipo === 'login')              
+                    } else if(respuesta.tipo === 'login'){
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Login correcto',
+                            text: 'Presiona ok'
+                          })
+                          .then(resultado =>{
+                              if (resultado.value) {
+                                  window.location.href = 'index.php';
+                              }
+                          })
+                    }              
                     
                 }else{
                     //Hubo un error
