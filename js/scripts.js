@@ -35,5 +35,14 @@ function nuevoProyecto(e) {
 }
 
 function guadarProyectoDB(nombreProyecto) {
-    console.log(nombreProyecto);
+     console.log(nombreProyecto);
+
+    //Inyectar el HTML
+    var nuevoProyecto = document.createElement('li');
+    nuevoProyecto.innerHTML = `
+        <a href="#">
+            ${nombreProyecto}
+        </a>
+    `;
+    listaProyectos.appendChild(nuevoProyecto);
 }
