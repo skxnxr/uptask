@@ -1,7 +1,22 @@
 <?php 
-    
+    session_start();
     include 'inc/funciones/funciones.php';
     include 'inc/templates/header.php';
+    
+
+    // echo "<pre>";
+    // var_dump($_SESSION);
+    // echo "</pre>";
+    // echo "<hr>";
+    // echo "<pre>";
+    // var_dump($_GET);
+    // echo "</pre>";
+
+    if (isset($_GET['cerrar_sesion'])) {
+        $_SESSION = array();
+    }
+    // var_dump($_SESSION);
+
 ?>
 
     <div class="contenedor-formulario">
