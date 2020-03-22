@@ -1,6 +1,6 @@
 eventListeners();
 
-//Lista de proyectos
+// lista de proyectos
 var listaProyectos = document.querySelector('ul#proyectos');
 
 function eventListeners() {
@@ -12,6 +12,7 @@ function eventListeners() {
 function nuevoProyecto(e) {
     e.preventDefault(); 
     //console.log('Presionaste en nuevo proyecto');
+var listaProyectos = document.querySelector('ul#proyectos');
 
     //Crea un input para el nombre del nuevo proyecto
     var nuevoProyecto = document.createElement('li');
@@ -66,11 +67,11 @@ function guadarProyectoDB(nombreProyecto) {
                     // Inyectar el HTML
                     var nuevoProyecto = document.createElement('li');
                     nuevoProyecto.innerHTML = `
-                        <a href="index.php?id_proyecto=${id_proyecto}" id="${id_proyecto}">
+                        <a href="index.php?id_proyecto=${id_proyecto}" id="proyecto:${id_proyecto}">
                             ${proyecto}
                         </a>
                     `;
-                    //Agregar al HTML
+                    // agregar al html
                     listaProyectos.appendChild(nuevoProyecto);
 
                     //Crear Alerta

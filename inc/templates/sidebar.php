@@ -4,20 +4,20 @@
         </div>
     
         <div class="panel lista-proyectos">
-            <h2>Proyectos</h2>
-            <ul id="proyectos">
-                <?php 
-                    $proyectos = obtenerProyectos();
-                    if ($proyectos) {
-                        foreach($proyectos as $proyecto){ ?>
-                            <li>
-                                <a href="index.php?id_proyecto=<?php echo $proyecto['id'];?>" id="<?php echo $proyecto['id'];?>">
-                                <?php echo $proyecto['nombre'];?>
-                            </li>
-                            
-                <?php } 
-                    }
-                ?>
-            </ul>
-        </div>
+        <h2>Proyectos</h2>
+        <ul id="proyectos">
+            <?php
+                $proyectos = obtenerProyectos();
+                if($proyectos) {
+                    foreach($proyectos as $proyecto) { ?>
+                        <li>
+                            <a href="index.php?id_proyecto=<?php echo $proyecto['id'] ?>" id="proyecto:<?php echo $proyecto['id'] ?>">
+                                <?php echo $proyecto['nombre'] ?>
+                            </a>
+                        </li>
+            <?php   }
+                }
+            ?>
+        </ul>
+    </div>
 </aside>
