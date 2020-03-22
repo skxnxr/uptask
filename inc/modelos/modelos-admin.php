@@ -60,12 +60,23 @@ if($accion === 'login'){
         $stmt->bind_result($nombre_usuario, $id_usuario, $pass_usuario);
         $stmt->fetch();
         if($nombre_usuario){
-            $respuesta = array(
-                'respuesta' => 'correcto',
-                'nombre' => $nombre_usuario,
-                'id' => $id_usuario,
-                'pass' => $pass_usuario
-            );
+            //El usuario existe, verificar el password
+            if(password_verify($password, $pass_usuario)){
+                //Login correcto
+                $respuesta = array(
+                    'respuesta' => 'correcto',
+                    'nombre' => $nombre_usuario
+                    // 'id' => $id_usuario,
+                    // 'pass' => $pass_usuario
+                );
+            }else{
+                //Login incorrecto, enviar error
+                $respuesta = array(
+                    'resultado' => 'Password Incorrecto'
+                );
+            }
+
+
         } else{
             $respuesta = array(
                 'error' => 'Usuario no existe'
