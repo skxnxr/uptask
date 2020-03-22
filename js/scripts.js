@@ -51,7 +51,73 @@ function guadarProyectoDB(nombreProyecto) {
     // En la carga
     xhr.onload = function() {
         if(this.status === 200) {
-            console.log(JSON.parse(xhr.responseText));
+            //obtener datos de la respuesta
+            var respuesta = JSON.parse(xhr.responseText);
+            var proyecto = respuesta.nombre_proyecto,
+                id_proyecto = respuesta.id_insertado,
+                tipo = respuesta.tipo,
+                resultado = respuesta.respuesta;
+
+            //Comprobar la inserción
+            if (resultado === 'correcto') {
+                //Exitoso
+                if (tipo === 'crear') {
+                    // Se creó un nuevo proyecto
+                    // Inyectar el HTML
+                    var nuevoProyecto = document.createElement('li');
+                    nuevoProyecto.innerHTML = `
+                        <a href="index.php?id_respuesta=${id_proyecto}" id="${id_proyecto}">
+                            ${proyecto}
+                        </a>
+                    `;
+                    //Agregar al HTML
+                    listaProyectos.appendChild(nuevoProyecto);
+
+                    //Crear Alerta
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'center',
+                        showConfirmButton: true,
+                        timer: 5000,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                        ,onClose: () => {
+                            window.location.href = 'index.php?id_proyecto=' + id_proyecto;
+                       }
+                      })
+                      Toast.fire({
+                        icon: 'success',
+                        title: 'Proyecto: ' + proyecto + '\n Creado correctamente'
+                        // text: 'creado correctamente'
+                      })
+
+                }else{
+                    //Se actualizo o se eliminó
+                }
+            } else {
+                //Hubo un error
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'center',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                    ,onClose: () => {
+                        window.location.href = 'index.php';
+                   }
+                  })
+                  Toast.fire({
+                    icon: 'error',
+                    title: 'Error'
+                  })
+            }
         }
     }
     
@@ -59,12 +125,5 @@ function guadarProyectoDB(nombreProyecto) {
     xhr.send(datos);
 
 
-    //Inyectar el HTML
-    // var nuevoProyecto = document.createElement('li');
-    // nuevoProyecto.innerHTML = `
-    //     <a href="#">
-    //         ${nombreProyecto}
-    //     </a>
-    // `;
-    // listaProyectos.appendChild(nuevoProyecto);
+    
 } 
