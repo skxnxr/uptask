@@ -16,7 +16,7 @@ function validarRegistro(e){
         //console.log(usuario + "" + password);
     if (usuario === '' || password === '') {
         Swal.fire({
-            type: 'error',
+            icon: 'error',
             title: 'Error',
             text: '¡Ambos campos son obligatorios!'
           })
@@ -48,27 +48,49 @@ function validarRegistro(e){
                     //Si es un nuevo usuario:
                     if (respuesta.tipo === 'crear') {
                         Swal.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: 'Usuario Creado',
                             text: 'El usuario se creo correctamente'
                           })
-                    } else if(respuesta.tipo === 'login'){
-                        Swal.fire({
-                            type: 'success',
-                            title: 'Login correcto',
-                            text: 'Presiona ok'
+                     } // else if(respuesta.tipo === 'login'){
+                    //     Swal.fire({
+                    //         icon: 'success',
+                    //         title: 'Login correcto',
+                    //         text: 'Presiona ok'
+                    //       })
+                    //       .then(resultado =>{
+                    //           if (resultado.value) {
+                    //               window.location.href = 'index.php';
+                    //           }
+                    //       })
+                    // }
+                    
+                    //Nueva ventana para el tipo login     
+                    else if(respuesta.tipo === 'login'){
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            onOpen: (toast) => {
+                              toast.addEventListener('mouseenter', Swal.stopTimer)
+                              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                            ,onClose: () => {
+                                window.location.href = 'index.php';
+                           }
                           })
-                          .then(resultado =>{
-                              if (resultado.value) {
-                                  window.location.href = 'index.php';
-                              }
-                          })
-                    }              
+                          Toast.fire({
+                            icon: 'success',
+                            title: 'Logueado correctamente'
+                          })       
+                    }         
                     
                 }else{
                     //Hubo un error
                     Swal.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: 'Error  :(',
                         text: 'Hubo un error'
                       })

@@ -25,8 +25,8 @@
             </div>
         </form>
     </div>
-
-¿<?php 
+    
+<?php 
     
     include 'inc/templates/footer.php';
 ?>
