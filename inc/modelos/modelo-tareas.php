@@ -3,6 +3,7 @@
 $accion = $_POST['accion'];
 $id_proyecto = (int) $_POST['id_proyecto'];
 $tarea = $_POST['tarea'];
+$estado = $_POST['estado'];
 
 if($accion === 'crear'){
 
@@ -39,4 +40,7 @@ if($accion === 'crear'){
         // );
      echo json_encode($respuesta);
 
+}
+if($accion === 'actualizar'){
+    echo json_encode($_POST);
 }
