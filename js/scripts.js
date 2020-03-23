@@ -175,7 +175,7 @@ function agregarTarea(e) {
                         // lanzar la alerta
                         const Toast = Swal.mixin({
                             toast: true,
-                            position: 'center',
+                            position: 'top-right',
                             showConfirmButton: true,
                             timer: 2200,
                             timerProgressBar: true,
@@ -192,6 +192,12 @@ function agregarTarea(e) {
                             title: 'La tarea: ' + tarea + '\n Se ha creado correctamente'
                             // text: 'creado correctamente'
                           })
+
+                          //Seleccionar un parrafon con la lista vacía
+                          var parrafoListaVacia = document.querySelectorAll('.lista-vacia');
+                          if (parrafoListaVacia.length > 0) {
+                              document.querySelector('.lista-vacia').remove();
+                          }
 
                           //Construir el template
                           var nuevaTarea = document.createElement('li');
@@ -332,6 +338,12 @@ function eliminarTareaBD(tarea) {
     xhr.onload = function() {
         if(this.status === 200) {
             console.log(JSON.parse(xhr.responseText));
+
+            //Comprobar que haya tareas restantes
+            var listaTareasRestantes = document.querySelectorAll('li.tarea');
+            if (listaTareasRestantes.length === 0) {
+                document.querySelector('.listado-pendientes ul').innerHTML = "<p class='lista-vacia'>No hay tareas en este proyecto</p>";
+            }
         }
     }
     // enviar la petición
