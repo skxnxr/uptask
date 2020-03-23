@@ -4,6 +4,7 @@ $accion = $_POST['accion'];
 $id_proyecto = (int) $_POST['id_proyecto'];
 $tarea = $_POST['tarea'];
 $estado = $_POST['estado'];
+$id_tarea = (int) $_POST['id'];
 
 if($accion === 'crear'){
 
@@ -42,5 +43,32 @@ if($accion === 'crear'){
 
 }
 if($accion === 'actualizar'){
-    echo json_encode($_POST);
+    //echo json_encode($_POST);
+
+    //Importar la conexion
+    include '../funciones/conexion.php';
+    try {
+        //Realiza la consulta a la base de datos
+        $stmt = $conn->prepare("UPDATE tareas set estado = ? WHERE id = ? ");
+        $stmt->bind_param('ii', $estado, $id_tarea);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            $respuesta = array(
+                'respuesta' => 'correcto'
+            );
+        }else{
+            $respuesta = array(
+                'respuesta' => 'error'
+            );
+        }
+        $stmt->close();
+        $conn->close();
+    } catch (Exception $e) {
+        //En caso de error, tomar la excepción
+        $respuesta = array(
+                'error' => $e->getMessage()
+            );
+    }
+     echo json_encode($respuesta);
+
 }
