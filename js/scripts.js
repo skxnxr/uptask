@@ -160,7 +160,7 @@ function agregarTarea(e) {
             if(this.status === 200) {
                 var respuesta = JSON.parse(xhr.responseText);
                 console.log(respuesta);
-            }
+            } 
         }
         // Enviar la consulta
         xhr.send(datos);
