@@ -159,7 +159,70 @@ function agregarTarea(e) {
         xhr.onload = function() {
             if(this.status === 200) {
                 var respuesta = JSON.parse(xhr.responseText);
-                console.log(respuesta);
+                
+                // asignar valores
+                var resultado = respuesta.respuesta,
+                    tarea = respuesta.tarea,
+                    id_insertado = respuesta.id_insertado,
+                    tipo = respuesta.tipo;
+                
+                if(resultado === 'correcto') {
+                    // se agregó correctamente
+                    if(tipo === 'crear') {
+                        // lanzar la alerta
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'center',
+                            showConfirmButton: true,
+                            timer: 2200,
+                            timerProgressBar: true,
+                            onOpen: (toast) => {
+                              toast.addEventListener('mouseenter', Swal.stopTimer)
+                              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        //     ,onClose: () => {
+                        //         window.location.href = 'index.php?id_proyecto=' + id_proyecto;
+                        //    }
+                          })
+                          Toast.fire({
+                            icon: 'success',
+                            title: 'La tarea: ' + tarea + '\n Se ha creado correctamente'
+                            // text: 'creado correctamente'
+                          })
+
+                          //Construir el template
+                          var nuevaTarea = document.createElement('li');
+                       
+                       // agregamos el ID
+                       nuevaTarea.id = 'tarea:'+id_insertado;
+                       
+                       // agregar la clase tarea
+                       nuevaTarea.classList.add('tarea');
+                       
+                       // construir el html
+                       nuevaTarea.innerHTML = `
+                            <p>${tarea}</p>
+                            <div class="acciones">
+                                <i class="far fa-check-circle"></i>
+                                <i class="fas fa-trash"></i>
+                            </div>
+                       `;
+                       
+                       // agregarlo al HTML
+                       var listado = document.querySelector('.listado-pendientes ul');
+                       listado.appendChild(nuevaTarea);
+                       
+                       // Limpiar el formulario
+                       document.querySelector('.agregar-tarea').reset();
+                    }
+                }else{
+                    //Hubo un error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error  :(',
+                        text: 'Hubo un error'
+                      })
+                }
             } 
         }
         // Enviar la consulta
