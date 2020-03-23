@@ -314,5 +314,27 @@ function cambiarEstadoTarea(tarea, estado){
 
 //Elimina las tareas de la BD
 function eliminarTareaBD(tarea) {
-    console.log(tarea);
+
+    var idTarea = tarea.id.split(':');
+
+    // crear llamado ajax
+    var xhr = new XMLHttpRequest();
+
+    // informacion
+    var datos = new FormData();
+    datos.append('id', idTarea[1]);
+    datos.append('accion', 'eliminar');
+
+    // abrir la conexion
+    xhr.open('POST', 'inc/modelos/modelo-tareas.php', true);
+
+    // on load
+    xhr.onload = function() {
+        if(this.status === 200) {
+            console.log(JSON.parse(xhr.responseText));
+        }
+    }
+    // enviar la petición
+    xhr.send(datos);
+
 }

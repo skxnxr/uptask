@@ -70,5 +70,34 @@ if($accion === 'actualizar'){
             );
     }
      echo json_encode($respuesta);
+}
+
+if($accion === 'eliminar'){
+
+    //Importar la conexion
+    include '../funciones/conexion.php';
+    try {
+        //Realiza la consulta a la base de datos
+        $stmt = $conn->prepare("DELETE from tareas WHERE id = ? ");
+        $stmt->bind_param('i', $id_tarea);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            $respuesta = array(
+                'respuesta' => 'correcto'
+            );
+        }else{
+            $respuesta = array(
+                'respuesta' => 'error'
+            );
+        }
+        $stmt->close();
+        $conn->close();
+    } catch (Exception $e) {
+        //En caso de error, tomar la excepción
+        $respuesta = array(
+                'error' => $e->getMessage()
+            );
+    }
+     echo json_encode($respuesta);
 
 }
