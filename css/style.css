@@ -226,7 +226,9 @@ body.index {
     color: white;
     font-size: 1.2rem;
 }
-
+.lista-vacia{
+    text-align: center;
+}
 /** Barra de avance del proyecto */
 .barra-avance{
     height: 30px;

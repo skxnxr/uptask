@@ -3,6 +3,7 @@ eventListeners();
 // lista de proyectos
 var listaProyectos = document.querySelector('ul#proyectos');
 
+
 function eventListeners() {
     //Document Ready
     document.addEventListener('DOMContentLoaded', function() {
@@ -368,11 +369,17 @@ function actualizarProgreso() {
     
     //Obtener todas las tareas
     const tareas = document.querySelectorAll('li.tarea');
-    //console.log(tareas.length);
+    console.log();
 
     //Obtener las tareas completadas
     const tareasCompletadas = document.querySelectorAll('i.completo');
     //console.log(tareasCompletadas.length);
+
+    //Eliminar de la pagina principal la barra de avance
+    const a = document.querySelector('.avance');
+    if (tareas.length === 0) {
+        a.remove();
+    }
 
     //Determinar el avance
     const avance = Math.round((tareasCompletadas.length / tareas.length) * 100);
