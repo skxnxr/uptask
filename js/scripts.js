@@ -241,10 +241,23 @@ function accionesTareas(e){
     //console.log(e.target);
 
     if (e.target.classList.contains('fa-check-circle')) {
-        console.log('click circulo');
+        if (e.target.classList.contains('completo')) {
+                e.target.classList.remove('completo');
+                cambiarEstadoTarea(e.target);
+        }else{
+            e.target.classList.add('completo');
+            cambiarEstadoTarea(e.target);
+        }
     }
     if (e.target.classList.contains('fa-trash')) {
         console.log('click icono de borrar');
     }
 
+}
+
+//Completa o descompleta una tarea (Traversing the DOM)
+
+function cambiarEstadoTarea(tarea){
+    var idTarea = tarea.parentElement.parentElement.id.split(':');
+    console.log(idTarea[1]);
 }
